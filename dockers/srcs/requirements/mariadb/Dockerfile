@@ -1,12 +1,19 @@
-FROM	nginx:1.25.3-alpine
+FROM alpine:3.18
 
-COPY
-RUN	apk add openssl
-RUN	openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-    	-keyout /etc/nginx/cert.key -out /etc/nginx/cert.crt \
-    	-subj "/C=US/ST=State/L=City/O=Organization/CN=localhost"
+
+RUN apk add mariadb mariadb-client openrc
+
+COPY mysql_secure_installation.sql /home/
+
+COPY mariadb-server.cnf /etc/my.cnf.d/
+
+COPY create_wordpressdb_user.sql /home/
+
+COPY start_mariadb.sh /home
+
+VOLUME ["/var/lib/mysql"]
 
 EXPOSE 3306
 
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+ENTRYPOINT ["sh", "/home/start_mariadb.sh"]
 
