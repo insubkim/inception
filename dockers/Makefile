@@ -22,8 +22,8 @@ clean:
 	rm -rf $(NAME)
 	# some script
 
-fclean: make clean
-	# some script
+fclean: 
+	sh ./srcs/requirements/tools/rmrfdocker	
 
 re:	make fclean
 	make all
