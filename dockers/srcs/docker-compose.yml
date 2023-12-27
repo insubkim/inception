@@ -1,15 +1,31 @@
 version: "3.9"  # optional since v1.27.0
 
 services:
-  web:
+  nginx:
     build: ./requirements/nginx/.
+    networks:
+      - net
     ports:
-      - "80:80"
+      - "443:443"
     depends_on:
       - wordpress
   wordpress:
-    container_name: wordpress
-    hostname: wordpress
     build: ./requirements/wordpress/.
-    ports:
-      - "9000:9000"
+    networks:
+      - net
+    depends_on:
+      - mariadb
+  mariadb:
+    build: ./requirements/mariadb/.
+    volumes:
+      - wordpress_table:/usr/local/mariadb
+    networks:
+      - net
+
+volumes:
+  wordpress_php:
+  wordpress_table:
+
+networks:
+  net:
+    driver: bridge
