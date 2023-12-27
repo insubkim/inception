@@ -1,8 +1,6 @@
 FROM alpine:3.18
 
-RUN apk add nginx
-RUN apk add openssl
-RUN apk add nmap
+RUN apk add nginx openssl nmap
 
 COPY ./conf/nginx.conf /etc/nginx/nginx.conf
 COPY ./tools/start.sh ~/start.sh

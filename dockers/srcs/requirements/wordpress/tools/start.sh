@@ -4,7 +4,8 @@ cd /usr/share/webapps/
 wget https://wordpress.org/latest.tar.gz
 tar -xzvf latest.tar.gz
 rm latest.tar.gz
-ln -s /usr/share/webapps/wordpress/ /var/www/localhost/htdocs/wordpress
+mkdir -p /var/www/scripts
+ln -s /usr/share/webapps/wordpress/ /var/www/scripts/wordpress
 
 # check mariadb
 while true ; do
@@ -19,4 +20,4 @@ while true ; do
 	fi
 done
 
-php81-fpm -f;
+php-fpm81 -F;

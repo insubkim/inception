@@ -3,6 +3,8 @@ version: "3.9"  # optional since v1.27.0
 services:
   nginx:
     build: ./requirements/nginx/.
+    volumes:
+      - wordpress_php:/usr/share/webapps/wordpress
     networks:
       - net
     ports:
@@ -11,6 +13,8 @@ services:
       - wordpress
   wordpress:
     build: ./requirements/wordpress/.
+    volumes:
+      - wordpress_php:/usr/share/webapps/wordpress
     networks:
       - net
     depends_on:
@@ -18,13 +22,13 @@ services:
   mariadb:
     build: ./requirements/mariadb/.
     volumes:
-      - wordpress_table:/usr/local/mariadb
+      - wordpress_db:/Users/insub/wordpress_db
     networks:
       - net
 
 volumes:
   wordpress_php:
-  wordpress_table:
+  wordpress_db:
 
 networks:
   net:
