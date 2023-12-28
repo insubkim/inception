@@ -4,6 +4,8 @@ services:
   nginx:
     build: ./requirements/nginx/.
     container_name: nginx
+    environment: 
+      hi: ${hi}
     volumes:
       - wordpress_php:/usr/share/webapps/wordpress
     networks:
