@@ -16,7 +16,6 @@ while true ; do
 		break
 	else
 		echo "wordpress: mariadb container not on";
-		sleep 1
 	fi
 done
 

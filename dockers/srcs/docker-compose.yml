@@ -3,6 +3,7 @@ version: "3.9"  # optional since v1.27.0
 services:
   nginx:
     build: ./requirements/nginx/.
+    container_name: nginx
     volumes:
       - wordpress_php:/usr/share/webapps/wordpress
     networks:
@@ -13,6 +14,7 @@ services:
       - wordpress
   wordpress:
     build: ./requirements/wordpress/.
+    container_name: wordpress
     volumes:
       - wordpress_php:/usr/share/webapps/wordpress
     networks:
@@ -21,8 +23,9 @@ services:
       - mariadb
   mariadb:
     build: ./requirements/mariadb/.
+    container_name: mariadb
     volumes:
-      - wordpress_db:/Users/insub/wordpress_db
+      - wordpress_db:/root
     networks:
       - net
 
