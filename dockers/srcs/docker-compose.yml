@@ -3,37 +3,58 @@ version: "3.9"  # optional since v1.27.0
 services:
   nginx:
     build: ./requirements/nginx/.
+    image: nginx:inception
     container_name: nginx
-    environment: 
-      hi: ${hi}
     volumes:
-      - wordpress_php:/usr/share/webapps/wordpress
+      - wordpress_php:/usr/share/webapps
     networks:
       - net
     ports:
       - "443:443"
     depends_on:
       - wordpress
+    #restart:  always
+  
   wordpress:
     build: ./requirements/wordpress/.
     container_name: wordpress
+    #environment:
+    #  WORDPRESS_ADMIN:  ${WORDPRESS_ADMIN}
+    #  WORDPRESS_ADMIN_PASS:  ${WORDPRESS_ADMIN_PASS}
+    #  WORDPRESS_USER1: ${WORDPRESS_USER1}
+    #  WORDPRESS_USER1_PASS: ${WORDPRESS_USER1_PASS}
     volumes:
-      - wordpress_php:/usr/share/webapps/wordpress
+      - wordpress_php:/usr/share/webapps
     networks:
       - net
     depends_on:
       - mariadb
+    #restart: always
+  
   mariadb:
     build: ./requirements/mariadb/.
     container_name: mariadb
+    environment:
+      ROOT_PASS: ${ROOT_PASS}
     volumes:
-      - wordpress_db:/root
+      - wordpress_db:/var/lib/mysql
     networks:
       - net
+    #restart: always
 
 volumes:
   wordpress_php:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: bind
+      device: '/home/inskim/data'
   wordpress_db:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: bind
+      device: '/home/inskim/data'
 
 networks:
   net:

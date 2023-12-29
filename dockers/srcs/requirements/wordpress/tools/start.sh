@@ -16,5 +16,5 @@ while true ; do
 		echo "wordpress: mariadb container not on";
 	fi
 done
-
+#wp cli
 php-fpm81 -F;

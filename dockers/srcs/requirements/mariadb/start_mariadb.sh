@@ -4,9 +4,11 @@ rc default
 
 rc-service mariadb start
 
-mysql -u root < /home/create_wordpressdb_user.sql
+mysql -u root -p < /home/mysql_secure_installation.sql
 
-mysql -u root < /home/mysql_secure_installation.sql
+mysql -u root -p$ROOT_PASS < /home/create_wordpressdb_user.sql
+# mariadb mysqldb install 
+# mariadb-openrc
 
 rc-service mariadb stop
 

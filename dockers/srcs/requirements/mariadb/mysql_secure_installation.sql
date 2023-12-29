@@ -1,4 +1,4 @@
-ALTER USER root@localhost IDENTIFIED VIA mysql_native_password USING PASSWORD("123");
+ALTER USER root@localhost IDENTIFIED VIA mysql_native_password USING PASSWORD("$ROOT_PASS");
 
 DELETE FROM mysql.user WHERE User='';
 
