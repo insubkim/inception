@@ -1,9 +1,13 @@
 
+# download wordpress
 mkdir -p /usr/share/webapps/
 cd /usr/share/webapps/
 wget https://wordpress.org/latest.tar.gz
 tar -xzvf latest.tar.gz
 rm latest.tar.gz
+
+# set wordpress database
+~/set-database.php
 
 # check mariadb
 while true ; do
@@ -16,5 +20,8 @@ while true ; do
 		echo "wordpress: mariadb container not on";
 	fi
 done
+
+# set wordpress website
 #wp cli
+
 php-fpm81 -F;

@@ -5,6 +5,7 @@ RUN apk add php81 php81-fpm php81-opcache php81-gd php81-mysqli php81-zlib php81
 
 COPY ./conf/www.conf /etc/php81/php-fpm.d/www.conf
 COPY ./conf/wp-config.php /usr/share/webapps/wordpress/wp-config.php
+COPY ./tools/set-database.sh ~/set-database.sh
 COPY ./tools/start.sh ~/start.sh
 
 EXPOSE 9000

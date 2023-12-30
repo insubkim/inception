@@ -18,11 +18,13 @@ services:
   wordpress:
     build: ./requirements/wordpress/.
     container_name: wordpress
-    #environment:
-    #  WORDPRESS_ADMIN:  ${WORDPRESS_ADMIN}
-    #  WORDPRESS_ADMIN_PASS:  ${WORDPRESS_ADMIN_PASS}
-    #  WORDPRESS_USER1: ${WORDPRESS_USER1}
-    #  WORDPRESS_USER1_PASS: ${WORDPRESS_USER1_PASS}
+    environment:
+      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
+      WORDPRESS_DB_PASS: ${WORDPRESS_DB_PASS}
+      WORDPRESS_GOD:  ${WORDPRESS_GOD}
+      WORDPRESS_GOD_PASS:  ${WORDPRESS_GOD_PASS}
+      WORDPRESS_USER1: ${WORDPRESS_USER1}
+      WORDPRESS_USER1_PASS: ${WORDPRESS_USER1_PASS}
     volumes:
       - wordpress_php:/usr/share/webapps
     networks:
@@ -36,6 +38,8 @@ services:
     container_name: mariadb
     environment:
       ROOT_PASS: ${ROOT_PASS}
+      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
+      WORDPRESS_DB_PASS: ${WORDPRESS_DB_PASS}
     volumes:
       - wordpress_db:/var/lib/mysql
     networks:
@@ -48,13 +52,13 @@ volumes:
     driver_opts:
       type: 'none'
       o: bind
-      device: '/home/inskim/data'
+      device: '/Users/insub/data'
   wordpress_db:
     driver: local
     driver_opts:
       type: 'none'
       o: bind
-      device: '/home/inskim/data'
+      device: '/Users/insub/data'
 
 networks:
   net:
