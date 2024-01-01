@@ -1,4 +1,0 @@
-/root/inception/dockers/srcs/requirements/tools/kill_docker_container
-/root/inception/dockers/srcs/requirements/tools/remove_docker_images
-yes | docker network prune;
-

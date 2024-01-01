@@ -3,7 +3,7 @@ version: "3.9"  # optional since v1.27.0
 services:
   nginx:
     build: ./requirements/nginx/.
-    image: nginx:inception
+    image: nginx:1.0
     container_name: nginx
     volumes:
       - wordpress_php:/usr/share/webapps
@@ -13,10 +13,16 @@ services:
       - "443:443"
     depends_on:
       - wordpress
-    #restart:  always
+    healthcheck:
+      test: ["CMD-SHELL", "ping -w 2 wordpress || kill 1"]
+      interval: 1s
+      timeout: 10s
+      retries: 1
+    restart:  always
   
   wordpress:
     build: ./requirements/wordpress/.
+    image: wordpress:1.0
     container_name: wordpress
     environment:
       WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
@@ -31,10 +37,16 @@ services:
       - net
     depends_on:
       - mariadb
-    #restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "ping -w 2 mariadb || kill 1"]
+      interval: 1s
+      timeout: 10s
+      retries: 1
+    restart: always
   
   mariadb:
     build: ./requirements/mariadb/.
+    image: mariadb:1.0
     container_name: mariadb
     environment:
       ROOT_PASS: ${ROOT_PASS}
@@ -44,7 +56,7 @@ services:
       - wordpress_db:/var/lib/mysql
     networks:
       - net
-    #restart: always
+    restart: always
 
 volumes:
   wordpress_php:
