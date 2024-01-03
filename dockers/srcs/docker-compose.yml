@@ -27,10 +27,14 @@ services:
     environment:
       WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
       WORDPRESS_DB_PASS: ${WORDPRESS_DB_PASS}
-      WORDPRESS_GOD:  ${WORDPRESS_GOD}
-      WORDPRESS_GOD_PASS:  ${WORDPRESS_GOD_PASS}
-      WORDPRESS_USER1: ${WORDPRESS_USER1}
-      WORDPRESS_USER1_PASS: ${WORDPRESS_USER1_PASS}
+      WP_GOD:  ${WP_GOD}
+      WP_GOD_PASS:  ${WP_GOD_PASS}
+      WP_GOD_EMAIL: ${WP_GOD_EMAIL}
+      WP_USR1: ${WP_USR1}
+      WP_USR1_PASS: ${WP_USR1_PASS}
+      WP_USR1_EMAIL: ${WP_USR1_EMAIL}
+      WP_URL: ${WP_URL}
+      WP_TITLE: ${WP_TITLE}
     volumes:
       - wordpress_php:/usr/share/webapps
     networks:
@@ -64,13 +68,13 @@ volumes:
     driver_opts:
       type: 'none'
       o: bind
-      device: '/Users/insub/data'
+      device: '~/inskim/data'
   wordpress_db:
     driver: local
     driver_opts:
       type: 'none'
       o: bind
-      device: '/Users/insub/data'
+      device: '~/inskim/data'
 
 networks:
   net:

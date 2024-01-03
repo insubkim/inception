@@ -15,16 +15,16 @@ NAME = inception
 all: $(NAME)
 
 $(NAME): 
-	touch $(NAME)
-	mkdir ~/inskim/data/
-	docker compose up -f ./srcs/docker-compose.yml --build
+	docker compose -f ./srcs/docker-compose.yml up --build
 clean:
-	rm -rf $(NAME)
 	docker system prune
 
 fclean: clean
 	docker volume prune
 
+remove:
+	sh ./srcs/requirements/tools/remove.sh
+	
 re:	make fclean
 	make all
 
