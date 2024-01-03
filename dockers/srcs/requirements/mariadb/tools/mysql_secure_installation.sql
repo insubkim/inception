@@ -1,4 +1,4 @@
-ALTER USER root@localhost IDENTIFIED BY '$ROOT_PASS');
+ALTER USER root@localhost IDENTIFIED BY "$ROOT_PASS";
 
 DELETE FROM mysql.user WHERE User='';
 
