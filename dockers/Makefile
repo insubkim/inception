@@ -2,14 +2,6 @@
 
 NAME = inception
 
-# ------------------------------- DIRECTORIES -------------------------------- #
-
-
-
-# ---------------------------------- FILES ----------------------------------- #
-
-
-
 # --------------------------------- RULES ------------------------------------ #
 
 all: $(NAME)
@@ -22,9 +14,11 @@ clean:
 fclean: clean
 	docker volume prune
 
-remove:
+remove: fclean
 	sh ./srcs/requirements/tools/remove.sh
-	
+	rm -rf ~/inskim/data/wordpress_php/*
+	rm -rf ~/inskim/data/wordpress_db/*
+
 re:	make fclean
 	make all
 

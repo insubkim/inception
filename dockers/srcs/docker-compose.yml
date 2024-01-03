@@ -6,7 +6,7 @@ services:
     image: nginx:1.0
     container_name: nginx
     volumes:
-      - wordpress_php:/usr/share/webapps
+      - wordpress_php:/var/www/html
     networks:
       - net
     ports:
@@ -36,7 +36,7 @@ services:
       WP_URL: ${WP_URL}
       WP_TITLE: ${WP_TITLE}
     volumes:
-      - wordpress_php:/usr/share/webapps
+      - wordpress_php:/var/www/html
     networks:
       - net
     depends_on:
@@ -68,13 +68,13 @@ volumes:
     driver_opts:
       type: 'none'
       o: bind
-      device: '~/inskim/data'
+      device: '~/inskim/data/wordpress_php'
   wordpress_db:
     driver: local
     driver_opts:
       type: 'none'
       o: bind
-      device: '~/inskim/data'
+      device: '~/inskim/data/wordpress_db'
 
 networks:
   net:
