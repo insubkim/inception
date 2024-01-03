@@ -68,13 +68,13 @@ volumes:
     driver_opts:
       type: 'none'
       o: bind
-      device: '~/inskim/data/wordpress_php'
+      device: '/home/inskim/data/wordpress_php'
   wordpress_db:
     driver: local
     driver_opts:
       type: 'none'
       o: bind
-      device: '~/inskim/data/wordpress_db'
+      device: '/home/inskim/data/wordpress_db'
 
 networks:
   net:

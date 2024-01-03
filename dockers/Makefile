@@ -7,17 +7,19 @@ NAME = inception
 all: $(NAME)
 
 $(NAME): 
+	mkdir -p /home/inskim/data/wordpress_db &2> /dev/null
+	mkdir /home/inskim/data/wordpress_php &2> /dev/null
 	docker compose -f ./srcs/docker-compose.yml up --build
 clean:
-	docker system prune
+	yes | docker system prune
 
 fclean: clean
-	docker volume prune
+	yes | docker volume prune
 
 remove: fclean
-	sh ./srcs/requirements/tools/remove.sh
-	rm -rf ~/inskim/data/wordpress_php/*
-	rm -rf ~/inskim/data/wordpress_db/*
+	sh ./srcs/requirements/tools/remove.sh &2>/dev/null
+	rm -rf /home/inskim/data/wordpress_php/* 
+	rm -rf /home/inskim/data/wordpress_db/* 
 
 re:	make fclean
 	make all
