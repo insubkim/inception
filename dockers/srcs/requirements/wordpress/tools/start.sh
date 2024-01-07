@@ -1,13 +1,17 @@
+timeout=300
+
 # check mariadb
-while true ; do
+while [ $timeout -ge 1 ] ; do
 	result=$(nmap mariadb -p 3306 | grep open | wc -l)
 
 	if [[ $result -ge 1 ]]; then
-		echo "port 3306 mariadb open"
-		break
+		echo "port 3306 mariadb open";
+		break;
 	else
 		echo "wordpress: mariadb container not on";
 	fi
+	sleep 1;
+	((timeout--));
 done
 
 if [ ! -f "/var/www/html/wordpress/index.php" ]; then
