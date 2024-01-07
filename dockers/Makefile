@@ -7,8 +7,8 @@ NAME = inception
 all: $(NAME)
 
 $(NAME): 
-	mkdir -p /home/inskim/data/wordpress_db &2> /dev/null
-	mkdir /home/inskim/data/wordpress_php &2> /dev/null
+	mkdir -p /home/inskim/data/wordpress_db \
+		/home/inskim/data/wordpress_php &2> /dev/null
 	docker compose -f ./srcs/docker-compose.yml up --build
 clean:
 	yes | docker system prune
