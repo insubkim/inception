@@ -14,7 +14,7 @@ while [ $timeout -ge 1 ] ; do
 		echo "nginx: wordpress container not on";
 	fi
 	sleep 1;
-	((timeout--))
+	timeout=`expr $timeout - 1`
 done
 
 

@@ -11,7 +11,7 @@ while [ $timeout -ge 1 ] ; do
 		echo "wordpress: mariadb container not on";
 	fi
 	sleep 1;
-	((timeout--));
+	timeout=`expr $timeout - 1`
 done
 
 if [ ! -f "/var/www/html/wordpress/index.php" ]; then
